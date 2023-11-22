@@ -1,0 +1,6 @@
+[
+    {
+      "name": "generator-backend",
+      "imageUri": "public.ecr.aws/u9k1g3j6/generator-backend:latest"
+    }
+  ]

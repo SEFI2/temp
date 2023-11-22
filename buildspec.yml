@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin  public.ecr.aws
+
+  build:
+    commands:
+      - echo Building Docker image...
+      - docker build -t public.ecr.aws/u9k1g3j6/generator-backend:latest .
+
+  post_build:
+    commands:
+      - echo Pushing Docker image to Amazon ECR...
+      - docker push public.ecr.aws/u9k1g3j6/generator-backend:latest
+      # Replace <YOUR_AWS_ACCOUNT_ID>, <YOUR_REGION>, and <YOUR_ECR_REPOSITORY_NAME> with your specific details
+artifacts:
+  files: imagedefinitions.json
